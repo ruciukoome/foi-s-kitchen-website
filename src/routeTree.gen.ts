@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MenuRouteImport } from './routes/menu'
+import { Route as OrderRouteImport } from './routes/order'
+import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesCorporateRouteImport } from './routes/services.corporate'
 import { Route as ServicesMealPrepRouteImport } from './routes/services.meal-prep'
 import { Route as ServicesWeddingsRouteImport } from './routes/services.weddings'
@@ -26,9 +30,29 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MenuRoute = MenuRouteImport.update({
   id: '/menu',
   path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderRoute = OrderRouteImport.update({
+  id: '/order',
+  path: '/order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesCorporateRoute = ServicesCorporateRouteImport.update({
@@ -50,7 +74,11 @@ const ServicesWeddingsRoute = ServicesWeddingsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
+  '/order': typeof OrderRoute
+  '/quote': typeof QuoteRoute
   '/services/corporate': typeof ServicesCorporateRoute
   '/services/meal-prep': typeof ServicesMealPrepRoute
   '/services/weddings': typeof ServicesWeddingsRoute
@@ -58,7 +86,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
+  '/order': typeof OrderRoute
+  '/quote': typeof QuoteRoute
   '/services/corporate': typeof ServicesCorporateRoute
   '/services/meal-prep': typeof ServicesMealPrepRoute
   '/services/weddings': typeof ServicesWeddingsRoute
@@ -67,7 +99,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
+  '/order': typeof OrderRoute
+  '/quote': typeof QuoteRoute
   '/services/corporate': typeof ServicesCorporateRoute
   '/services/meal-prep': typeof ServicesMealPrepRoute
   '/services/weddings': typeof ServicesWeddingsRoute
@@ -77,7 +113,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/contact'
+    | '/gallery'
     | '/menu'
+    | '/order'
+    | '/quote'
     | '/services/corporate'
     | '/services/meal-prep'
     | '/services/weddings'
@@ -85,7 +125,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/contact'
+    | '/gallery'
     | '/menu'
+    | '/order'
+    | '/quote'
     | '/services/corporate'
     | '/services/meal-prep'
     | '/services/weddings'
@@ -93,7 +137,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/contact'
+    | '/gallery'
     | '/menu'
+    | '/order'
+    | '/quote'
     | '/services/corporate'
     | '/services/meal-prep'
     | '/services/weddings'
@@ -102,7 +150,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   MenuRoute: typeof MenuRoute
+  OrderRoute: typeof OrderRoute
+  QuoteRoute: typeof QuoteRoute
   ServicesCorporateRoute: typeof ServicesCorporateRoute
   ServicesMealPrepRoute: typeof ServicesMealPrepRoute
   ServicesWeddingsRoute: typeof ServicesWeddingsRoute
@@ -124,11 +176,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/menu': {
       id: '/menu'
       path: '/menu'
       fullPath: '/menu'
       preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order': {
+      id: '/order'
+      path: '/order'
+      fullPath: '/order'
+      preLoaderRoute: typeof OrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/corporate': {
@@ -158,7 +238,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   MenuRoute: MenuRoute,
+  OrderRoute: OrderRoute,
+  QuoteRoute: QuoteRoute,
   ServicesCorporateRoute: ServicesCorporateRoute,
   ServicesMealPrepRoute: ServicesMealPrepRoute,
   ServicesWeddingsRoute: ServicesWeddingsRoute,
