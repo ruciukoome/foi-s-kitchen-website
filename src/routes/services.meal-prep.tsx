@@ -13,12 +13,12 @@ export const Route = createFileRoute("/services/meal-prep")({
       {
         name: "description",
         content:
-          "Lean, plant-forward and family meal prep plans delivered twice a week in Nairobi. Portioned, labelled and ready to heat.",
+          "5, 10 or 14 meals delivered fresh weekly to your door step in Nairobi. Portioned, labelled and ready to heat.",
       },
       { property: "og:title", content: "Weekly Meal Prep Plans — Foi's Kitchen" },
       {
         property: "og:description",
-        content: "Pick a plan, we cook and deliver your week. From KSh 5,800.",
+        content: "5 meals KSh 4,500 · 10 meals KSh 6,800 · 14 meals KSh 9,500. Delivered fresh weekly.",
       },
     ],
   }),
@@ -31,7 +31,7 @@ function MealPrepPage() {
       <PageHero
         eyebrow="Meal prep plans"
         title="Your week, cooked and portioned."
-        intro="Choose a plan on Friday, eat well all week. Delivered twice weekly across Nairobi in sealed, labelled containers."
+        intro="Pick 5, 10 or 14 meals. Cooked fresh and delivered weekly to your door step in sealed, labelled containers."
       >
         <PrimaryLink to="/order">Go to your order</PrimaryLink>
         <WhatsAppLink message={`Hi ${site.name}! I'd like help choosing a meal prep plan.`}>
