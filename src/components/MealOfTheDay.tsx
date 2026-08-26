@@ -14,7 +14,7 @@ const featured = [
 ];
 
 export function MealOfTheDay() {
-  const item = featured[new Date().getDay() % featured.length];
+  const item = featured[new Date().getDay() % featured.length]!;
 
   return (
     <section className="section-y">
