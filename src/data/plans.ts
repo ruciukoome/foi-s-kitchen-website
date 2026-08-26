@@ -1,6 +1,6 @@
-import planLean from "@/assets/plan-lean.jpg";
-import planPlant from "@/assets/plan-plant.jpg";
-import planFamily from "@/assets/plan-family.jpg";
+import plan5 from "@/assets/plan-5-meals.jpg";
+import plan10 from "@/assets/plan-10-meals.jpg";
+import plan14 from "@/assets/plan-14-meals.jpg";
 
 export type Plan = {
   id: string;
@@ -12,48 +12,47 @@ export type Plan = {
   tags: string[];
 };
 
-// [PLACEHOLDER] Meal prep plans and pricing.
 export const plans: Plan[] = [
   {
-    id: "lean",
-    name: "Lean & Light",
-    price: 6500,
+    id: "5-meals",
+    name: "5 Meals",
+    price: 4500,
     cadence: "per week",
-    image: planLean,
+    image: plan5,
     includes: [
-      "10 portioned lunches or dinners",
-      "Lean protein, grains and greens",
-      "Calorie and macro card in every box",
-      "Sunday and Wednesday delivery",
+      "5 portioned meals, delivered fresh weekly",
+      "Protein, carb and veg in every box",
+      "Delivered to your door step",
+      "Swap dishes each week",
     ],
-    tags: ["High protein", "Low carb"],
+    tags: ["Weekly", "Balanced"],
   },
   {
-    id: "plant",
-    name: "Plant Forward",
-    price: 5800,
+    id: "10-meals",
+    name: "10 Meals",
+    price: 6800,
     cadence: "per week",
-    image: planPlant,
+    image: plan10,
     includes: [
-      "10 fully plant-based meals",
-      "Lentils, chickpeas, seasonal veg",
-      "Nut-free on request",
-      "Sunday and Wednesday delivery",
+      "10 portioned meals, delivered fresh weekly",
+      "Lunch and dinner covered",
+      "Delivered to your door step",
+      "Adjust for allergies and portion size",
     ],
-    tags: ["Vegan", "Fibre rich"],
+    tags: ["Most popular", "Weekly"],
   },
   {
-    id: "family",
-    name: "Family Table",
-    price: 11500,
+    id: "14-meals",
+    name: "14 Meals",
+    price: 9500,
     cadence: "per week",
-    image: planFamily,
+    image: plan14,
     includes: [
-      "5 family-size dinners (serves 4)",
-      "Home-style stews, rice and greens",
-      "Reheat in 10 minutes",
-      "One weekly delivery, day of your choice",
+      "14 portioned meals, delivered fresh weekly",
+      "Two meals a day, all week",
+      "Delivered to your door step",
+      "Best value per meal",
     ],
-    tags: ["Serves 4", "Home-style"],
+    tags: ["Best value", "Weekly"],
   },
 ];
