@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChefHat, Leaf, MessageCircle, ClipboardCheck, CookingPot, Bike } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { TestimonialCard } from "@/components/TestimonialCard";
+import { MealOfTheDay } from "@/components/MealOfTheDay";
 import { PrimaryLink, OutlineLink } from "@/components/CtaButtons";
 import { testimonials } from "@/data/testimonials";
 import { categories, menuItems } from "@/data/menu";
@@ -148,7 +149,7 @@ function HomePage() {
             </h2>
           </SectionReveal>
 
-          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
             {featuredCategories.map((c, i) => (
               <SectionReveal key={c.name} delay={i * 60}>
                 <Link
@@ -173,6 +174,8 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      <MealOfTheDay />
 
       {/* How it works */}
       <section className="section-y bg-card">
