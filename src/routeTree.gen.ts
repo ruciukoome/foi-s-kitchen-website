@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as ServicesCorporateRouteImport } from './routes/services.corporate'
+import { Route as ServicesMealPrepRouteImport } from './routes/services.meal-prep'
+import { Route as ServicesWeddingsRouteImport } from './routes/services.weddings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCorporateRoute = ServicesCorporateRouteImport.update({
+  id: '/services/corporate',
+  path: '/services/corporate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesMealPrepRoute = ServicesMealPrepRouteImport.update({
+  id: '/services/meal-prep',
+  path: '/services/meal-prep',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesWeddingsRoute = ServicesWeddingsRouteImport.update({
+  id: '/services/weddings',
+  path: '/services/weddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/menu': typeof MenuRoute
+  '/services/corporate': typeof ServicesCorporateRoute
+  '/services/meal-prep': typeof ServicesMealPrepRoute
+  '/services/weddings': typeof ServicesWeddingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/menu': typeof MenuRoute
+  '/services/corporate': typeof ServicesCorporateRoute
+  '/services/meal-prep': typeof ServicesMealPrepRoute
+  '/services/weddings': typeof ServicesWeddingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/menu': typeof MenuRoute
+  '/services/corporate': typeof ServicesCorporateRoute
+  '/services/meal-prep': typeof ServicesMealPrepRoute
+  '/services/weddings': typeof ServicesWeddingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/menu'
+    | '/services/corporate'
+    | '/services/meal-prep'
+    | '/services/weddings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/menu'
+    | '/services/corporate'
+    | '/services/meal-prep'
+    | '/services/weddings'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/menu'
+    | '/services/corporate'
+    | '/services/meal-prep'
+    | '/services/weddings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  MenuRoute: typeof MenuRoute
+  ServicesCorporateRoute: typeof ServicesCorporateRoute
+  ServicesMealPrepRoute: typeof ServicesMealPrepRoute
+  ServicesWeddingsRoute: typeof ServicesWeddingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/corporate': {
+      id: '/services/corporate'
+      path: '/services/corporate'
+      fullPath: '/services/corporate'
+      preLoaderRoute: typeof ServicesCorporateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/meal-prep': {
+      id: '/services/meal-prep'
+      path: '/services/meal-prep'
+      fullPath: '/services/meal-prep'
+      preLoaderRoute: typeof ServicesMealPrepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/weddings': {
+      id: '/services/weddings'
+      path: '/services/weddings'
+      fullPath: '/services/weddings'
+      preLoaderRoute: typeof ServicesWeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  MenuRoute: MenuRoute,
+  ServicesCorporateRoute: ServicesCorporateRoute,
+  ServicesMealPrepRoute: ServicesMealPrepRoute,
+  ServicesWeddingsRoute: ServicesWeddingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
