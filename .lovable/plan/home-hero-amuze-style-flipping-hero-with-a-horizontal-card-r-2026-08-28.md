@@ -13,7 +13,7 @@ Rebuild the Foi's Kitchen home hero to match the reference layout from the other
 |  short supporting line                                     |
 |  [ Order now ]  [ See the menu ]                           |
 |                                                            |
-|          [card] [ACTIVE CARD] [card] [card]   <- horizontal|
+|                [card][ACTIVE CARD][card][card]<- horizontal|
 |              <  o o o o  >                                 |
 +-----------------------------------------------------------+
 ```
