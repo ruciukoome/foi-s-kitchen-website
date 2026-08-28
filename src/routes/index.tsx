@@ -32,11 +32,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const heroSlides = [
-  { src: hero1, alt: "Kenyan feast spread on a wooden table" },
-  { src: hero2, alt: "Garden event buffet at golden hour" },
-  { src: hero3, alt: "Meal prep containers ready for delivery" },
-];
 
 const features = [
   { icon: Leaf, title: "Fresh daily", body: "Cooked the morning it's delivered. Never reheated stock." },
