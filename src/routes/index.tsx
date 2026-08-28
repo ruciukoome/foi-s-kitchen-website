@@ -1,17 +1,13 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChefHat, Leaf, MessageCircle, ClipboardCheck, CookingPot, Bike } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { MealOfTheDay } from "@/components/MealOfTheDay";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { PrimaryLink, OutlineLink } from "@/components/CtaButtons";
 import { testimonials } from "@/data/testimonials";
 import { categories, menuItems } from "@/data/menu";
-import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
