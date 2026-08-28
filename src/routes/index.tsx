@@ -48,7 +48,6 @@ const featuredCategories = categories.map((c) => ({
 }));
 
 function HomePage() {
-  const [slide, setSlide] = useState(0);
 
   return (
     <>
