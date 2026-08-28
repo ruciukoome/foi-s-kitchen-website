@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -67,25 +67,33 @@ const slides: Slide[] = [
 ];
 
 const SWIPE = 50;
+const INTERVAL = 4000;
+const count = slides.length;
+
+/** Shortest signed distance from active to index, wrapping around. */
+function offsetOf(index: number, active: number) {
+  let d = index - active;
+  if (d > count / 2) d -= count;
+  if (d < -count / 2) d += count;
+  return d;
+}
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const touchStart = useRef<number | null>(null);
   const touchEnd = useRef<number | null>(null);
-  const railRef = useRef<HTMLDivElement>(null);
 
-  const go = (i: number) => setActive((i + slides.length) % slides.length);
+  const go = useCallback((i: number) => setActive((i + count) % count), []);
 
   useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const card = rail.children[active] as HTMLElement | undefined;
-    if (!card) return;
-    rail.scrollTo({
-      left: card.offsetLeft - rail.clientWidth / 2 + card.clientWidth / 2,
-      behavior: "smooth",
-    });
-  }, [active]);
+    if (paused) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    const t = window.setInterval(() => setActive((a) => (a + 1) % count), INTERVAL);
+    return () => window.clearInterval(t);
+  }, [paused, active]);
 
   const slide = slides[active]!;
 
@@ -94,6 +102,10 @@ export function HeroCarousel() {
       className="relative min-h-[88vh] overflow-hidden md:min-h-[92vh]"
       aria-roledescription="carousel"
       aria-label="Foi's Kitchen highlights"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
       onTouchStart={(e) => {
         touchEnd.current = null;
         touchStart.current = e.targetTouches[0]!.clientX;
@@ -124,116 +136,125 @@ export function HeroCarousel() {
       ))}
       <div className="absolute inset-0 bg-foreground/65" />
 
-      <div className="container-page relative flex min-h-[88vh] flex-col justify-end pt-24 pb-10 md:min-h-[92vh] md:pb-14">
-        <div key={slide.id} className="max-w-3xl">
-          <p className="label-caps animate-fade-up text-background/80">{slide.eyebrow}</p>
-          <h1
-            className="animate-fade-up mt-4 font-display text-[2.2rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.3rem]"
-            style={{ animationDelay: "100ms" }}
-          >
-            {slide.title}
-          </h1>
-          <p
-            className="animate-fade-up mt-4 max-w-xl text-base text-background/85 md:text-[17px]"
-            style={{ animationDelay: "200ms" }}
-          >
-            {slide.copy}
-          </p>
-          <div className="animate-fade-up mt-7 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
-            <Link
-              to={slide.to}
-              className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97]"
+      <div className="container-page relative flex min-h-[88vh] flex-col justify-center pt-28 pb-14 md:min-h-[92vh]">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
+          <div key={slide.id} className="max-w-2xl">
+            <p className="label-caps animate-fade-up text-background/80">{slide.eyebrow}</p>
+            <h1
+              className="animate-fade-up mt-4 font-display text-[2.2rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.3rem]"
+              style={{ animationDelay: "100ms" }}
             >
-              {slide.cta}
-            </Link>
-            <Link
-              to="/order"
-              className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97]"
+              {slide.title}
+            </h1>
+            <p
+              className="animate-fade-up mt-4 max-w-xl text-base text-background/85 md:text-[17px]"
+              style={{ animationDelay: "200ms" }}
             >
-              Order online
-            </Link>
-          </div>
-        </div>
-
-        {/* Horizontal card rail */}
-        <div
-          ref={railRef}
-          className="mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:none] md:justify-center md:gap-4 md:overflow-visible [&::-webkit-scrollbar]:hidden"
-        >
-          {slides.map((s, i) => {
-            const isActive = i === active;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => go(i)}
-                aria-label={`Show ${s.cardLabel}`}
-                aria-current={isActive}
-                className={cn(
-                  "relative shrink-0 snap-center overflow-hidden rounded-2xl text-left transition-all duration-300 ease-out",
-                  "h-28 w-40 sm:h-32 sm:w-48",
-                  isActive
-                    ? "scale-100 opacity-100 ring-2 ring-primary md:scale-[1.08]"
-                    : "opacity-70 ring-1 ring-background/30 hover:opacity-100 md:scale-[0.92]",
-                )}
+              {slide.copy}
+            </p>
+            <div className="animate-fade-up mt-7 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
+              <Link
+                to={slide.to}
+                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97]"
               >
-                <img
-                  src={s.image}
-                  alt={s.cardLabel}
-                  loading="lazy"
-                  width={512}
-                  height={384}
-                  className="h-full w-full object-cover"
-                />
-                <span className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/25 to-transparent" />
-                <span className="absolute inset-x-3 bottom-2.5 block text-background">
-                  <span className="block font-display text-[15px] font-semibold leading-tight">
-                    {s.cardLabel}
-                  </span>
-                  <span className="block text-[13px] text-background/80">{s.cardNote}</span>
-                </span>
+                {slide.cta}
+              </Link>
+              <Link
+                to="/order"
+                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97]"
+              >
+                Order online
+              </Link>
+            </div>
+
+            {/* Controls */}
+            <div className="mt-9 flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => go(active - 1)}
+                aria-label="Previous slide"
+                className="grid h-11 w-11 place-items-center rounded-full border border-background/30 text-background transition-colors duration-200 ease-out hover:border-background"
+              >
+                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
               </button>
-            );
-          })}
-        </div>
 
-        <div className="mt-4 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={() => go(active - 1)}
-            aria-label="Previous slide"
-            className="grid h-11 w-11 place-items-center rounded-full border border-background/30 text-background transition-colors duration-200 ease-out hover:border-background"
-          >
-            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-          </button>
+              <div className="flex gap-1">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => go(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className="grid h-11 w-8 place-items-center"
+                  >
+                    <span
+                      className={cn(
+                        "block h-1.5 rounded-full transition-all duration-300 ease-out",
+                        i === active ? "w-8 bg-primary" : "w-4 bg-background/50",
+                      )}
+                    />
+                  </button>
+                ))}
+              </div>
 
-          <div className="flex gap-2">
-            {slides.map((s, i) => (
               <button
-                key={s.id}
                 type="button"
-                onClick={() => go(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className="grid h-11 w-8 place-items-center"
+                onClick={() => go(active + 1)}
+                aria-label="Next slide"
+                className="grid h-11 w-11 place-items-center rounded-full border border-background/30 text-background transition-colors duration-200 ease-out hover:border-background"
               >
-                <span
+                <ChevronRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+
+          {/* Clamped horizontal card deck */}
+          <div className="relative mx-auto h-48 w-full max-w-[460px] sm:h-56">
+            {slides.map((s, i) => {
+              const pos = offsetOf(i, active);
+              const isActive = pos === 0;
+              const visible = Math.abs(pos) <= 1;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => go(i)}
+                  tabIndex={visible ? 0 : -1}
+                  aria-label={`Show ${s.cardLabel}`}
+                  aria-current={isActive}
                   className={cn(
-                    "block h-1.5 rounded-full transition-all duration-300 ease-out",
-                    i === active ? "w-8 bg-primary" : "w-4 bg-background/50",
+                    "absolute top-1/2 left-1/2 -ml-[6.5rem] overflow-hidden rounded-2xl text-left transition-all duration-[400ms] ease-out sm:-ml-[8rem]",
+                    "h-32 w-52 sm:h-40 sm:w-64",
+                    isActive
+                      ? "shadow-2xl ring-2 ring-primary"
+                      : "ring-1 ring-background/30 hover:ring-background/60",
+                    !visible && "pointer-events-none",
                   )}
-                />
-              </button>
-            ))}
+                  style={{
+                    transform: `translateY(-50%) translateX(${pos * 52}%) scale(${isActive ? 1 : 0.84})`,
+                    opacity: visible ? (isActive ? 1 : 0.65) : 0,
+                    zIndex: isActive ? 20 : visible ? 10 : 0,
+                  }}
+                >
+                  <img
+                    src={s.image}
+                    alt={s.cardLabel}
+                    loading="lazy"
+                    width={576}
+                    height={352}
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/25 to-transparent" />
+                  <span className="absolute inset-x-4 bottom-3 block text-background">
+                    <span className="block font-display text-base font-semibold leading-tight">
+                      {s.cardLabel}
+                    </span>
+                    <span className="block text-[13px] text-background/80">{s.cardNote}</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
-
-          <button
-            type="button"
-            onClick={() => go(active + 1)}
-            aria-label="Next slide"
-            className="grid h-11 w-11 place-items-center rounded-full border border-background/30 text-background transition-colors duration-200 ease-out hover:border-background"
-          >
-            <ChevronRight className="h-5 w-5" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </section>
