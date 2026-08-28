@@ -61,70 +61,8 @@ function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative min-h-[78vh] overflow-hidden md:min-h-[86vh]">
-        {heroSlides.map((s, i) => (
-          <img
-            key={s.src}
-            src={s.src}
-            alt={s.alt}
-            width={1600}
-            height={1008}
-            className={cn(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
-              i === slide ? "opacity-100" : "opacity-0",
-            )}
-          />
-        ))}
-        <div className="absolute inset-0 bg-foreground/60" />
+      <HeroCarousel />
 
-        <div className="container-page relative flex min-h-[78vh] flex-col justify-end pt-20 pb-16 md:min-h-[86vh] md:pb-24">
-          <p className="label-caps animate-fade-up text-background/80">Nairobi · Catering &amp; meal prep</p>
-          <h1
-            className="animate-fade-up mt-4 max-w-3xl font-display text-[2.4rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.4rem]"
-            style={{ animationDelay: "100ms" }}
-          >
-            Home-style food, cooked fresh and delivered hot.
-          </h1>
-          <p
-            className="animate-fade-up mt-4 max-w-xl text-base text-background/85 md:text-[17px]"
-            style={{ animationDelay: "200ms" }}
-          >
-            Catering for your event, meal prep for your week, and daily orders for
-            the days you'd rather not cook.
-          </p>
-          <div className="animate-fade-up mt-8 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
-            <PrimaryLink to="/order">Order now</PrimaryLink>
-            <Link
-              to="/menu"
-              className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97]"
-            >
-              See the menu
-            </Link>
-          </div>
-
-          <div className="mt-10 flex gap-2" role="tablist" aria-label="Hero images">
-            {heroSlides.map((s, i) => (
-              <button
-                key={s.src}
-                type="button"
-                role="tab"
-                aria-selected={i === slide}
-                aria-label={`Show image ${i + 1}`}
-                onClick={() => setSlide(i)}
-                className="grid h-11 w-11 place-items-center"
-              >
-                <span
-                  className={cn(
-                    "block h-1.5 rounded-full transition-all duration-300 ease-out",
-                    i === slide ? "w-8 bg-primary" : "w-4 bg-background/50",
-                  )}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Features */}
       <section className="section-y bg-card">
