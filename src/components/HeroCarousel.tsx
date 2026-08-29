@@ -252,12 +252,15 @@ export function HeroCarousel() {
                     className="h-full w-full object-cover"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/25 to-transparent" />
-                  <span className="absolute inset-x-4 bottom-3 block text-background">
-                    <span className="block font-display text-base font-semibold leading-tight">
+                  <span className="absolute inset-x-3 bottom-3 block text-background sm:inset-x-4">
+                    <span className="block truncate font-display text-sm font-semibold leading-tight sm:text-base">
                       {s.cardLabel}
                     </span>
-                    <span className="block text-[13px] text-background/80">{s.cardNote}</span>
+                    <span className="block truncate text-xs text-background/80 sm:text-[13px]">
+                      {s.cardNote}
+                    </span>
                   </span>
+
                 </button>
               );
             })}
