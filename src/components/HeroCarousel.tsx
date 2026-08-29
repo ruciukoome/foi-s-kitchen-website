@@ -215,7 +215,7 @@ export function HeroCarousel() {
           </div>
 
           {/* Clamped horizontal card deck */}
-          <div className="relative mx-auto h-48 w-full max-w-[460px] sm:h-56">
+          <div className="relative mx-auto h-40 w-full max-w-[460px] sm:h-56">
             {slides.map((s, i) => {
               const pos = offsetOf(i, active);
               const isActive = pos === 0;
@@ -229,8 +229,9 @@ export function HeroCarousel() {
                   aria-label={`Show ${s.cardLabel}`}
                   aria-current={isActive}
                   className={cn(
-                    "absolute top-1/2 left-1/2 -ml-[6.5rem] overflow-hidden rounded-2xl text-left transition-all duration-[400ms] ease-out sm:-ml-[8rem]",
-                    "h-32 w-52 sm:h-40 sm:w-64",
+                    "absolute top-1/2 left-1/2 -ml-20 overflow-hidden rounded-2xl text-left transition-all duration-[400ms] ease-out sm:-ml-[8rem]",
+                    "h-28 w-40 sm:h-40 sm:w-64",
+
                     isActive
                       ? "shadow-2xl ring-2 ring-primary"
                       : "ring-1 ring-background/30 hover:ring-background/60",
