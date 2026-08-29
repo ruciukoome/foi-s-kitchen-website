@@ -99,7 +99,8 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative min-h-[88vh] overflow-hidden md:min-h-[92vh]"
+      className="relative min-h-[calc(100svh-72px)] overflow-hidden md:min-h-[92vh]"
+
       aria-roledescription="carousel"
       aria-label="Foi's Kitchen highlights"
       onMouseEnter={() => setPaused(true)}
@@ -136,9 +137,10 @@ export function HeroCarousel() {
       ))}
       <div className="absolute inset-0 bg-foreground/65" />
 
-      <div className="container-page relative flex min-h-[88vh] flex-col justify-center pt-28 pb-14 md:min-h-[92vh]">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
+      <div className="container-page relative flex min-h-[calc(100svh-72px)] flex-col justify-center pt-10 pb-24 md:min-h-[92vh] md:pt-28 md:pb-14">
+        <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
           <div key={slide.id} className="max-w-2xl">
+
             <p className="label-caps animate-fade-up text-background/80">{slide.eyebrow}</p>
             <h1
               className="animate-fade-up mt-4 font-display text-[2.2rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.3rem]"
