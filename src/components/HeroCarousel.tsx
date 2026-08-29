@@ -99,7 +99,8 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative min-h-[88vh] overflow-hidden md:min-h-[92vh]"
+      className="relative min-h-[calc(100svh-72px)] overflow-hidden md:min-h-[92vh]"
+
       aria-roledescription="carousel"
       aria-label="Foi's Kitchen highlights"
       onMouseEnter={() => setPaused(true)}
@@ -136,39 +137,44 @@ export function HeroCarousel() {
       ))}
       <div className="absolute inset-0 bg-foreground/65" />
 
-      <div className="container-page relative flex min-h-[88vh] flex-col justify-center pt-28 pb-14 md:min-h-[92vh]">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
+      <div className="container-page relative flex min-h-[calc(100svh-72px)] flex-col justify-center pt-10 pb-24 md:min-h-[92vh] md:pt-28 md:pb-14">
+        <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
           <div key={slide.id} className="max-w-2xl">
+
             <p className="label-caps animate-fade-up text-background/80">{slide.eyebrow}</p>
             <h1
-              className="animate-fade-up mt-4 font-display text-[2.2rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.3rem]"
+              className="animate-fade-up mt-3 font-display text-[2rem] leading-[1.12] font-bold text-background sm:text-5xl md:mt-4 md:text-[3.3rem]"
               style={{ animationDelay: "100ms" }}
             >
               {slide.title}
             </h1>
             <p
-              className="animate-fade-up mt-4 max-w-xl text-base text-background/85 md:text-[17px]"
+              className="animate-fade-up mt-3 max-w-xl text-[15px] text-background/85 sm:text-base md:mt-4 md:text-[17px]"
               style={{ animationDelay: "200ms" }}
             >
               {slide.copy}
             </p>
-            <div className="animate-fade-up mt-7 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
+            <div
+              className="animate-fade-up mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-7"
+              style={{ animationDelay: "300ms" }}
+            >
               <Link
                 to={slide.to}
-                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97]"
+                className="label-caps inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97] sm:w-auto"
               >
                 {slide.cta}
               </Link>
               <Link
                 to="/order"
-                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97]"
+                className="label-caps inline-flex min-h-[48px] w-full items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97] sm:w-auto"
               >
                 Order online
               </Link>
             </div>
 
             {/* Controls */}
-            <div className="mt-9 flex items-center gap-4">
+            <div className="mt-6 flex items-center gap-4 md:mt-9">
+
               <button
                 type="button"
                 onClick={() => go(active - 1)}
@@ -209,7 +215,7 @@ export function HeroCarousel() {
           </div>
 
           {/* Clamped horizontal card deck */}
-          <div className="relative mx-auto h-48 w-full max-w-[460px] sm:h-56">
+          <div className="relative mx-auto h-40 w-full max-w-[460px] sm:h-56">
             {slides.map((s, i) => {
               const pos = offsetOf(i, active);
               const isActive = pos === 0;
@@ -223,8 +229,9 @@ export function HeroCarousel() {
                   aria-label={`Show ${s.cardLabel}`}
                   aria-current={isActive}
                   className={cn(
-                    "absolute top-1/2 left-1/2 -ml-[6.5rem] overflow-hidden rounded-2xl text-left transition-all duration-[400ms] ease-out sm:-ml-[8rem]",
-                    "h-32 w-52 sm:h-40 sm:w-64",
+                    "absolute top-1/2 left-1/2 -ml-20 overflow-hidden rounded-2xl text-left transition-all duration-[400ms] ease-out sm:-ml-[8rem]",
+                    "h-28 w-40 sm:h-40 sm:w-64",
+
                     isActive
                       ? "shadow-2xl ring-2 ring-primary"
                       : "ring-1 ring-background/30 hover:ring-background/60",
@@ -245,12 +252,21 @@ export function HeroCarousel() {
                     className="h-full w-full object-cover"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/25 to-transparent" />
-                  <span className="absolute inset-x-4 bottom-3 block text-background">
-                    <span className="block font-display text-base font-semibold leading-tight">
+                  <span
+                    className={cn(
+                      "absolute inset-x-3 bottom-3 block text-background sm:inset-x-4",
+                      !isActive && "hidden sm:block",
+                    )}
+                  >
+
+                    <span className="block truncate font-display text-sm font-semibold leading-tight sm:text-base">
                       {s.cardLabel}
                     </span>
-                    <span className="block text-[13px] text-background/80">{s.cardNote}</span>
+                    <span className="block truncate text-xs text-background/80 sm:text-[13px]">
+                      {s.cardNote}
+                    </span>
                   </span>
+
                 </button>
               );
             })}
