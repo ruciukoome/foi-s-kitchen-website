@@ -143,34 +143,38 @@ export function HeroCarousel() {
 
             <p className="label-caps animate-fade-up text-background/80">{slide.eyebrow}</p>
             <h1
-              className="animate-fade-up mt-4 font-display text-[2.2rem] leading-[1.1] font-bold text-background sm:text-5xl md:text-[3.3rem]"
+              className="animate-fade-up mt-3 font-display text-[2rem] leading-[1.12] font-bold text-background sm:text-5xl md:mt-4 md:text-[3.3rem]"
               style={{ animationDelay: "100ms" }}
             >
               {slide.title}
             </h1>
             <p
-              className="animate-fade-up mt-4 max-w-xl text-base text-background/85 md:text-[17px]"
+              className="animate-fade-up mt-3 max-w-xl text-[15px] text-background/85 sm:text-base md:mt-4 md:text-[17px]"
               style={{ animationDelay: "200ms" }}
             >
               {slide.copy}
             </p>
-            <div className="animate-fade-up mt-7 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
+            <div
+              className="animate-fade-up mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-7"
+              style={{ animationDelay: "300ms" }}
+            >
               <Link
                 to={slide.to}
-                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97]"
+                className="label-caps inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-primary px-7 text-primary-foreground transition-all duration-200 ease-out hover:bg-primary-deep hover:scale-[1.02] active:scale-[0.97] sm:w-auto"
               >
                 {slide.cta}
               </Link>
               <Link
                 to="/order"
-                className="label-caps inline-flex min-h-[48px] items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97]"
+                className="label-caps inline-flex min-h-[48px] w-full items-center justify-center rounded-full border border-background/40 px-6 text-background transition-all duration-200 ease-out hover:scale-[1.02] hover:border-background active:scale-[0.97] sm:w-auto"
               >
                 Order online
               </Link>
             </div>
 
             {/* Controls */}
-            <div className="mt-9 flex items-center gap-4">
+            <div className="mt-6 flex items-center gap-4 md:mt-9">
+
               <button
                 type="button"
                 onClick={() => go(active - 1)}
