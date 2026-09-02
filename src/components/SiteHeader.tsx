@@ -104,7 +104,7 @@ export function SiteHeader() {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="animate-fade-up border-t border-background/15 bg-foreground lg:hidden">
+        <div className="animate-fade-up border-t border-border bg-card text-foreground lg:hidden">
           <nav className="container-page flex flex-col py-3" aria-label="Mobile">
             <MobileLink to="/" label="Home" />
             <MobileLink to="/about" label="About" />
