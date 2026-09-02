@@ -46,9 +46,9 @@ export function SiteHeader() {
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 lg:flex lg:justify-between">
         <Link to="/" className="flex min-w-0 items-center gap-2">
           <img
-            src={logoAsset.url}
+            src={logo}
             alt={`${site.name} logo`}
-            className="h-10 w-10 shrink-0 rounded-full object-cover"
+            className="h-9 w-auto shrink-0"
           />
           <span className="truncate font-display text-lg font-bold">{site.name}</span>
         </Link>
