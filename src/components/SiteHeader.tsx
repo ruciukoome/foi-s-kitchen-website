@@ -11,11 +11,6 @@ const mainLinks = [
   { to: "/about", label: "About" },
 ] as const;
 
-const serviceLinks = [
-  { to: "/services/corporate", label: "Corporate Catering" },
-  { to: "/services/weddings", label: "Weddings & Private Events" },
-  { to: "/services/meal-prep", label: "Meal Prep Plans" },
-] as const;
 
 const orderLinks = [
   { to: "/order", label: "Order Online" },
@@ -24,14 +19,12 @@ const orderLinks = [
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const { count, bump } = useCart();
   const [bumping, setBumping] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     setMobileOpen(false);
-    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -59,7 +52,7 @@ export function SiteHeader() {
             <NavItem key={l.to} to={l.to} label={l.label} />
           ))}
 
-          <Dropdown label="Services" links={serviceLinks} />
+          <NavItem to="/services" label="Services" />
 
           <NavItem to="/menu" label="Menu" />
 
@@ -108,25 +101,7 @@ export function SiteHeader() {
           <nav className="container-page flex flex-col py-3" aria-label="Mobile">
             <MobileLink to="/" label="Home" />
             <MobileLink to="/about" label="About" />
-
-            <button
-              type="button"
-              onClick={() => setServicesOpen((o) => !o)}
-              aria-expanded={servicesOpen}
-              className="flex min-h-[48px] items-center justify-between font-display text-base font-semibold"
-            >
-              Services
-              <ChevronDown
-                className={cn("h-4 w-4 transition-transform duration-200 ease-out", servicesOpen && "rotate-180")}
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-            </button>
-            {servicesOpen &&
-              serviceLinks.map((l) => (
-                <MobileLink key={l.to} to={l.to} label={l.label} indent />
-              ))}
-
+            <MobileLink to="/services" label="Services" />
             <MobileLink to="/menu" label="Menu" />
             <MobileLink to="/gallery" label="Gallery & Reviews" />
             <MobileLink to="/contact" label="Contact" />

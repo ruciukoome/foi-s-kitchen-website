@@ -5,7 +5,9 @@ import { TestimonialCard } from "@/components/TestimonialCard";
 import { MealOfTheDay } from "@/components/MealOfTheDay";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { PrimaryLink, OutlineLink } from "@/components/CtaButtons";
+import { ServiceCard } from "@/components/ServiceCard";
 import { testimonials } from "@/data/testimonials";
+import { services } from "@/data/services";
 import { categories, menuItems } from "@/data/menu";
 import { site } from "@/lib/site";
 
@@ -64,6 +66,26 @@ function HomePage() {
               <p className="text-muted-foreground">{f.body}</p>
             </SectionReveal>
           ))}
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="section-y">
+        <div className="container-page">
+          <SectionReveal>
+            <p className="label-caps text-primary">Services</p>
+            <h2 className="mt-2 font-display text-[1.75rem] font-semibold md:text-[2rem]">
+              What we offer
+            </h2>
+          </SectionReveal>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {services.map((service, i) => (
+              <SectionReveal key={service.id} delay={i * 80}>
+                <ServiceCard service={service} />
+              </SectionReveal>
+            ))}
+          </div>
         </div>
       </section>
 
