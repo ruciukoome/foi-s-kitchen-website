@@ -42,7 +42,7 @@ export function SiteHeader() {
   }, [bump]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-foreground/10 bg-foreground text-background">
+    <header className="sticky top-0 z-40 border-b border-border bg-card text-foreground">
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 lg:flex lg:justify-between">
         <Link to="/" className="flex min-w-0 items-center gap-2">
           <img
