@@ -4,7 +4,7 @@ import { ChevronDown, Menu, ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/foi-logo.jpeg.asset.json";
+import logo from "@/assets/logo.png";
 
 const mainLinks = [
   { to: "/", label: "Home" },
