@@ -105,6 +105,11 @@ function HomePage() {
 
       <MealOfTheDay />
 
+      {/* Gold divider between the featured meal and the process strip */}
+      <div className="container-page">
+        <div className="h-px w-full bg-gold" aria-hidden="true" />
+      </div>
+
       {/* How it works */}
       <section className="section-y bg-card">
         <div className="container-page">
