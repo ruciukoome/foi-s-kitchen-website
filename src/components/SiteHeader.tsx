@@ -19,14 +19,12 @@ const orderLinks = [
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const { count, bump } = useCart();
   const [bumping, setBumping] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     setMobileOpen(false);
-    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
