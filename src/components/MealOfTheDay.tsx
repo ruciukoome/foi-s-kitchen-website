@@ -17,7 +17,7 @@ export function MealOfTheDay() {
   const item = featured[new Date().getDay() % featured.length]!;
 
   return (
-    <section className="section-y">
+    <section className="section-y bg-blush">
       <div className="container-page">
         <div className="grid overflow-hidden rounded-3xl bg-foreground text-background md:grid-cols-2">
           <div className="aspect-[4/3] md:aspect-auto">
