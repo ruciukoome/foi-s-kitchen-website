@@ -11,11 +11,7 @@ const mainLinks = [
   { to: "/about", label: "About" },
 ] as const;
 
-const serviceLinks = [
-  { to: "/services/corporate", label: "Corporate Catering" },
-  { to: "/services/weddings", label: "Weddings & Private Events" },
-  { to: "/services/meal-prep", label: "Meal Prep Plans" },
-] as const;
+const serviceLinks = [] as const;
 
 const orderLinks = [
   { to: "/order", label: "Order Online" },
