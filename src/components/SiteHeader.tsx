@@ -11,7 +11,6 @@ const mainLinks = [
   { to: "/about", label: "About" },
 ] as const;
 
-const serviceLinks = [] as const;
 
 const orderLinks = [
   { to: "/order", label: "Order Online" },
