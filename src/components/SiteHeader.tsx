@@ -55,7 +55,7 @@ export function SiteHeader() {
             <NavItem key={l.to} to={l.to} label={l.label} />
           ))}
 
-          <Dropdown label="Services" links={serviceLinks} />
+          <NavItem to="/services" label="Services" />
 
           <NavItem to="/menu" label="Menu" />
 
